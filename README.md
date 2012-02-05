@@ -3,6 +3,18 @@ Default
 
 Default Node.js + Express.js + Socket.IO project template
 
+Tired of doing ``express YOUR_PROJECT_NAME`` and having to rename files, make new ones, then configure your app to support minimal websocket interaction? Try Default!
+
+It offers:
+
+* app.js renamed to server.js
+* Public directories renamed to css, js, img
+* Includes jquery-1.7.1.min.js
+* Server HTTP request logger
+* Favicon
+* Minimal Socket.io implementation, show number of total connected clients and their session id
+* Debug console toggable with "\"
+
 Requirements
 ------------
 
