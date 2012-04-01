@@ -1,9 +1,10 @@
 Default
 ======
 
-Default Node.js + Express.js + Socket.IO + jQuery project template
+Default Node.js + Socket.IO + jQuery + Express.js project boilerplate
 
 Tired of doing ``express YOUR_PROJECT_NAME`` and having to:
+
 * rename files, make new ones,
 * then configure your app to support Socket.IO interaction and
 * manage user data structure, with join/quit/synchronization events?
@@ -18,10 +19,12 @@ It offers:
 * Server HTTP request logger
 * Favicon
 
+
 * User class shared between client and server
 * Keep users data structure synchronized between client and server
 * Manage user join/quit websocket events with Socket.IO
 * All connection events are logged on console.log
+
 
 * Debug console toggable with "\", show number of total connected users and their session id
 
