@@ -24,7 +24,7 @@ $(document).ready(function() {
 		status = $('<div/>', {
 			id: 'status'
 		});
-		
+
 		clientId = $('<div/>', {
 			id: 'clientId'
 		});
@@ -115,7 +115,7 @@ $(document).ready(function() {
 				quitter = players[i].nick;
 				players.splice(i, 1);
 				break;
-			}defaultDebug
+			}
 		}
 
 		log('< Player quitted: '+ quitter +' (id: '+ data.id +').');
