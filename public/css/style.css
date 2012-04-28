@@ -11,7 +11,7 @@ a {
 	clear: both;
 }
 
-#debug {
+#default-debug {
 	display: none;
 	position: fixed;
 	right: 10px;
