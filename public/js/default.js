@@ -11,16 +11,48 @@ $(document).ready(function() {
 	function toggleDebug(spd) {
 		var speed = spd || 'fast';
 	
-		debug.fadeToggle(speed);
-		debug.toggleClass("active");
-		if (debug.hasClass("active")) {
+		defaultDebug.fadeToggle(speed);
+		defaultDebug.toggleClass("active");
+		if (defaultDebug.hasClass("active")) {
 
 		} else {
 
 		}
 	}
 
+	function insertDebug() {
+		status = $('<div/>', {
+			id: 'status'
+		});
+		
+		clientId = $('<div/>', {
+			id: 'clientId'
+		});
+
+		tot = $('<span/>', {
+			id: 'tot',
+			text: '0'
+		});
+
+		online = $('<div/>', {
+			id: 'online',
+			text: ' players online.'
+		});
+
+		online.prepend(tot);
+
+		defaultDebug = $('<div/>', {
+			id: 'default-debug'
+		}).append( status )
+		  .append( clientId )
+		  .append( online );
+
+		$('body').append( defaultDebug );
+	}
+
 	function init() {
+		insertDebug();
+
 		status.html("Connecting...");
 
 		$(document).keyup(function(e) {
@@ -36,11 +68,11 @@ $(document).ready(function() {
 
 	var socket = new io.connect(window.location.href);
 	
-	var status = $("#status"),
-		clientId = $("#clientId"),
-		online = $("#online"),
-		tot = $("#tot"),
-		debug = $("#debug");
+	var status,
+		clientId,
+		online,
+		tot,
+		defaultDebug;
 
 	var player = new Player(),
 		players = [];
@@ -83,7 +115,7 @@ $(document).ready(function() {
 				quitter = players[i].nick;
 				players.splice(i, 1);
 				break;
-			}
+			}defaultDebug
 		}
 
 		log('< Player quitted: '+ quitter +' (id: '+ data.id +').');
