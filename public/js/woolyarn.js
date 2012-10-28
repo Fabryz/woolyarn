@@ -122,7 +122,7 @@
 				this.online.prepend(this.tot);
 
 				this.guiHandle = $('<div/>', {
-					id: 'default-debug'
+					id: 'woolyarn-debug'
 				}).append( this.status )
 				.append( this.playerId )
 				.append( this.online );

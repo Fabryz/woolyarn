@@ -11,13 +11,13 @@ a {
 	clear: both;
 }
 
-#default-debug {
+#woolyarn-debug {
 	display: none;
 	position: fixed;
 	right: 10px;
 	bottom: 0;
 	background-color: #FFFFDD;
-	border: 0px solid #CCC;
+	border: 0 none;
 	border-bottom: none;
 	padding: 10px;
 	font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
