@@ -1,11 +1,13 @@
 (function(exports) {
 
-	var Player = function(id) {
+	var Player = function(id, nick) {
 		this.id = id || -1;
-		this.nick = 'Guest'+ this.id;
+		this.nick = 'player'+ this.id || nick;
+		this.createdAt = Date.now();
+		this.updatedAt = Date.now();
 	};
 
-	Player.prototype.toString = function() { 
+	Player.prototype.toString = function() {
 		return '('+ this.id +') '+ this.nick;
 	};
 

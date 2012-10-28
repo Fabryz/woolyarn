@@ -1,7 +1,8 @@
-- make this goddamn thing independent
 - require it via remote git link on other projects
+- npm package
+- server integration
+
 - maxplayers / infinite players
 - server configs
 - better integration with Mangonel
-- main.js
 - protocols
