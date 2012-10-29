@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	Woolyarn.client.init(window.location.origin);
+	Woolyarn.client.init();
 
 	var socket = Woolyarn.getSocket();
 });

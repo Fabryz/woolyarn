@@ -19,11 +19,11 @@ app.configure(function(){
 });
 
 app.configure('development', function(){
-	app.use(express.errorHandler({ dumpExceptions: true, showStack: true })); 
+	app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
 });
 
 app.configure('production', function(){
-	app.use(express.errorHandler()); 
+	app.use(express.errorHandler());
 });
 
 // Routes
@@ -40,65 +40,11 @@ console.log('* Express server listening in %s mode', app.settings.env);
 */
 
 var	io = require('socket.io').listen(app),
-	Player = require('./public/js/Player.js').Player,
-	players = [],
- 	totPlayers = 0;
+	Woolyarn = require('./public/js/woolyarn.js').Woolyarn;
 	
-io.configure(function() { 
+io.configure(function() {
 	io.enable('browser client minification');
-	io.set('log level', 1); 
-}); 
-
-function getPlayerById(id) {
-	var length = players.length;
-	for(var i = 0; i < length; i++) {
-		if (players[i].id == id) {
-			return players[i];
-		}
-	}
-
-	return null;
-}
-
-function newPlayer(client) {
-	p = new Player(client.id);
-	players.push(p);
-
-	client.emit('join', { player: p });
-	client.broadcast.emit('newplayer', { player: p });
-
-	console.log('+ New player: '+ p.nick);
-}
-
-function sendPlayerList(client) {
-	client.emit('playerlist', { list: players });
-	console.log('* Sent player list to '+ client.id);
-}
-
-io.sockets.on('connection', function(client) {
-	newPlayer(client);
-	sendPlayerList(client);
-
-	totPlayers++;
-	console.log('+ Player '+ client.id +' connected, total players: '+ totPlayers);
-
-	io.sockets.emit('tot', { tot: totPlayers });
-
-	client.on('disconnect', function() {
-		var quitter = '';
-
-		var length = players.length;
-		for(var i = 0; i < length; i++) {
-			if (players[i].id == client.id) {
-				quitter = players[i].nick;
-				players.splice(i, 1);
-				break;
-			}
-		}
-
-		totPlayers--;
-		client.broadcast.emit('quit', { id: client.id });
-		io.sockets.emit('tot', { tot: totPlayers });
-		console.log('- Player '+ quitter +' ('+ client.id +') disconnected, total players: '+ totPlayers);
-	});
+	io.set('log level', 1);
 });
+
+Woolyarn.server.init(io);
