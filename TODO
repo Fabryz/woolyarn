@@ -1,8 +1,8 @@
 - require it via remote git link on other projects
 - npm package
-- server integration
+- make a Wiki
 
-- maxplayers / infinite players
+- maxplayers / infinite players -> configs
 - server configs
 - better integration with Mangonel
 - protocols
