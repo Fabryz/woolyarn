@@ -6,3 +6,5 @@
 - server configs
 - better integration with Mangonel
 - protocols
+
+getClient -> prende il client di client/server {}

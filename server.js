@@ -3,19 +3,23 @@
 */
 
 var express = require('express'),
-	app = module.exports = express.createServer();
+	http = require('http'),
+    path = require('path');
+
+var app = express();
 
 // Configuration
 
 app.configure(function(){
+	app.set('port', process.env.PORT || 8080);
 	app.set('views', __dirname + '/views');
 	app.set('view engine', 'jade');
+	app.use(express.favicon());
+	app.use(express.logger('short'));
 	app.use(express.bodyParser());
 	app.use(express.methodOverride());
 	app.use(app.router);
-	app.use(express.static(__dirname + '/public'));
-	app.use(express.logger(':remote-addr - :method :url HTTP/:http-version :status :res[content-length] - :response-time ms'));
-	app.use(express.favicon());
+	app.use(express.static(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function(){
@@ -28,18 +32,19 @@ app.configure('production', function(){
 
 // Routes
 
-app.get('/',  function(req, res) {
-	res.sendfile('index.html');
-});
+// app.get('/', function(req, res) {
+// 	res.sendfile('index.html');
+// });
 
-app.listen(8080);
-console.log('* Express server listening in %s mode', app.settings.env);
+var server = http.createServer(app).listen(app.get('port'), function(){
+  console.log("Express server listening on port "+ app.get('port') +" in "+ app.get('env') +" mode.");
+});
 
 /*
 * Socket.IO
 */
 
-var	io = require('socket.io').listen(app),
+var	io = require('socket.io').listen(server),
 	Woolyarn = require('./public/js/woolyarn.js').Woolyarn;
 	
 io.configure(function() {
@@ -48,3 +53,11 @@ io.configure(function() {
 });
 
 Woolyarn.server.init(io);
+
+var client = Woolyarn.server.getClient();
+
+// console.log(client);
+
+// client.on('customEvent', function(data) {
+// 	io.sockets.emit('customEvent');
+// });

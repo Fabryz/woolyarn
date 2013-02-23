@@ -53,14 +53,14 @@ Installation
 
 1. Clone the repository with ``git clone git://github.com/Fabryz/woolyarn.git YOUR_PROJECT_NAME``
 2. Install dependencies with ``npm install``
-3. Start the server with ``node server.js``
-4. Point your browser to ``YOUR_SERVER_IP:8080``
+3. Start the server with ``NODE_ENV=development node server.js``
+4. Point your browser to ``<YOUR_SERVER_IP>:8080``
 5. [Congratulate yourself](http://i.imgur.com/WAxOG.gif) for the time you have now gained, start developing
 
 License
 -------
 
-Copyright (C) 2012 Fabrizio Codello
+Copyright (C) 2013 Fabrizio Codello
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by

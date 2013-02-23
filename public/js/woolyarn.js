@@ -24,6 +24,7 @@
 
 	var Woolyarn = {
 		socket: null,
+		client: null,
 		player: null,
 		players: [],
 		totalPlayers : 0,
@@ -161,6 +162,8 @@
 			init: function(io) {
 
 				io.sockets.on('connection', function(client) {
+					Woolyarn.client = client;
+
 					Woolyarn.player = new Woolyarn.Player(client.id);
 
 					Woolyarn.server.newPlayer(client, Woolyarn.player);
@@ -211,6 +214,9 @@
 				client.broadcast.emit('newplayer', player);
 
 				this.debug.log('> New player: '+ player.nick);
+			},
+			getClient: function() {
+				return Woolyarn.client;
 			},
 
 			debug: {
