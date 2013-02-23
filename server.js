@@ -3,10 +3,12 @@
 */
 
 var express = require('express'),
+	socketio = require('socket.io'),
 	http = require('http'),
     path = require('path');
 
-var app = express();
+var app = express(),
+	Woolyarn = require('./public/js/woolyarn.js').Woolyarn;
 
 // Configuration
 
@@ -44,8 +46,7 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 * Socket.IO
 */
 
-var	io = require('socket.io').listen(server),
-	Woolyarn = require('./public/js/woolyarn.js').Woolyarn;
+var	io = socketio.listen(server);	
 	
 io.configure(function() {
 	io.enable('browser client minification');
