@@ -10,3 +10,6 @@
 - use getClient
 - timestamp on each client/server interaction
 - synch with skew (don't allow timestamps +- CONST)
+
+- minification
+?- serve woolyarn to the client as socket.io does
