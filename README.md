@@ -20,7 +20,6 @@ It offers:
 * Manage user join/quit websocket events with Socket.IO
 * All connection events are logged on console.log
 * Uses [RequireJS](http://requirejs.org/) module loader
-
 * app.js renamed to server.js
 * Public directories renamed to css, js, img
 * Includes the latest version of minified jQuery
