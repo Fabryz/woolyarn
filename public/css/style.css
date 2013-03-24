@@ -11,6 +11,10 @@ a {
 	clear: both;
 }
 
+button {
+	cursor: pointer;
+}
+
 #woolyarn-debug {
 	display: none;
 	position: fixed;

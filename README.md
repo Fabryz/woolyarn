@@ -1,9 +1,9 @@
 Woolyarn
 ========
 
-* REFACTOR IN PROGRESS *
+![Woolyarn](http://i.imgur.com/RsLVP88.jpg "Woolyarn")
 
-Woolyarn Node.js + Socket.IO + jQuery + Express.js project boilerplate
+Woolyarn is a Node.js + Socket.IO + Express.js project boilerplate
 
 Tired of doing ``express YOUR_PROJECT_NAME`` and having to:
 
@@ -15,20 +15,18 @@ Try Woolyarn!
 
 It offers:
 
-* app.js renamed to server.js
-* Public directories renamed to css, js, img
-* Includes latest version of minified jQuery 
-* Server HTTP request logger
-* Favicon
-
-
-* User class shared between client and server
+* User class is shared between the client and the server
 * Keep users data structure synchronized between client and server
 * Manage user join/quit websocket events with Socket.IO
 * All connection events are logged on console.log
+* Uses [RequireJS](http://requirejs.org/) module loader
 
-
-* Debug console toggable with "\", show number of total connected users and their session id
+* app.js renamed to server.js
+* Public directories renamed to css, js, img
+* Includes the latest version of minified jQuery
+* Server HTTP request logger
+* Favicon
+* Quick debug console toggable with "\", that shows the current client id and the number of the total connected users
 
 Examples of projects based on Woolyarn:
 

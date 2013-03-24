@@ -1,6 +1,7 @@
 /*
 * Woolyarn
-* A library for your realtime applications
+* A library to manage user events and interactions in your realtime application.
+* It keeps everything synchronized for you.
 * @author: Codello Fabrizio
 */
 
@@ -24,7 +25,6 @@
 
 	var Woolyarn = {
 		socket: null,
-		client: null,
 		player: null,
 		players: [],
 		totalPlayers : 0,
@@ -43,6 +43,7 @@
 		client: {
 			init: function(host) {
 				var debug = this.debug;
+
 				debug.init();
 
 				Woolyarn.client.connect(host || window.location.origin);
@@ -94,7 +95,7 @@
 					Woolyarn.players.push(newPlayer);
 
 					debug.log('> New player joined: '+ newPlayer.nick +' (id: '+ newPlayer.id +').');
-					
+
 					newPlayer = {};
 				});
 
@@ -115,7 +116,8 @@
 			},
 
 			connect: function(host) {
-				return Woolyarn.socket = new io.connect(host);
+				Woolyarn.socket = new io.connect(host);
+				return Woolyarn.socket;
 			},
 
 			debug: {
@@ -158,11 +160,14 @@
 			}
 		},
 		server: {
-
-			init: function(io) {
+			client: null,
+			on: function(event, callback) {
+				Woolyarn.server.client.on(event, callback);
+			},
+			init: function(io, callback) {
 
 				io.sockets.on('connection', function(client) {
-					Woolyarn.client = client;
+					Woolyarn.server.client = client;
 
 					Woolyarn.player = new Woolyarn.Player(client.id);
 
@@ -191,7 +196,10 @@
 						io.sockets.emit('tot', Woolyarn.totalPlayers);
 						Woolyarn.server.debug.log('< '+ quitter +' ('+ client.id +') disconnected, total players: '+ Woolyarn.totalPlayers);
 					});
+
+					callback(client);
 				});
+
 			},
 			getPlayerById: function(id) {
 				var length = Woolyarn.players.length;
@@ -216,7 +224,7 @@
 				this.debug.log('> New player: '+ player.nick);
 			},
 			getClient: function() {
-				return Woolyarn.client;
+				return Woolyarn.server.client;
 			},
 
 			debug: {

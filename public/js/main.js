@@ -1,14 +1,27 @@
 $(document).ready(function() {
 
-	Woolyarn.client.init();
+	required_files = [
+		'/socket.io/socket.io.js',
+		'/js/woolyarn.js'
+	];
 
-	var socket = Woolyarn.getSocket();
+	require(required_files, function() {
 
-	$('button').on('click', function() {
-		socket.emit('customEvent');
-	});
+		Woolyarn.client.init('http://localhost:8080');
 
-	socket.on('customEvent', function() {
-		alert('Clicked button, do something!');
+		// Send a customEvent event when the button is pressed
+		$('button').on('click', function() {
+			Woolyarn.socket.emit('customEvent');
+
+			console.log('customEvent event fired');
+		});
+
+		// A customEvent event has arrived, who pressed it?
+		Woolyarn.socket.on('customEvent', function(clientId) {
+			console.log('customEvent event arrived from '+ clientId);
+
+			alert(clientId +' has clicked the button!');
+		});
+
 	});
 });

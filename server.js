@@ -35,7 +35,7 @@ app.configure('production', function(){
 // Routes
 
 // app.get('/', function(req, res) {
-// 	res.sendfile('index.html');
+//  res.sendfile('public/index.html');
 // });
 
 var server = http.createServer(app).listen(app.get('port'), function(){
@@ -46,19 +46,20 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 * Socket.IO
 */
 
-var	io = socketio.listen(server);	
-	
+var	io = socketio.listen(server);
+
 io.configure(function() {
 	io.enable('browser client minification');
 	io.set('log level', 1);
 });
 
-Woolyarn.server.init(io);
+Woolyarn.server.init(io, function(client) {
 
-var client = Woolyarn.server.getClient();
+	// Here you can listen for your events
 
-// console.log(client);
+	Woolyarn.server.on('customEvent', function(data) {
+		console.log('Incoming customEvent from: '+ client.id);
 
-// client.on('customEvent', function(data) {
-// 	io.sockets.emit('customEvent');
-// });
+		io.sockets.emit('customEvent', client.id);
+	});
+});
