@@ -4,14 +4,8 @@ Woolyarn
 ![Woolyarn](http://i.imgur.com/RsLVP88.jpg "Woolyarn")
 
 Woolyarn is a Node.js + Socket.IO + Express.js project boilerplate
-
-Tired of doing ``express YOUR_PROJECT_NAME`` and having to:
-
-* rename files, make new ones,
-* then configure your app to support Socket.IO interaction and
-* manage user data structure, with join/quit/synchronization events?
-
-Try Woolyarn!
+It is a library to manage user events and interactions in your realtime application.
+It keeps everything synchronized for you.
 
 It offers:
 
@@ -26,6 +20,14 @@ It offers:
 * Server HTTP request logger
 * Favicon
 * Quick debug console toggable with "\", that shows the current client id and the number of the total connected users
+
+Tired of doing ``express YOUR_PROJECT_NAME`` and having to:
+
+* rename files, make new ones,
+* then configure your app to support Socket.IO interaction and
+* manage user data structure, with join/quit/synchronization events?
+
+Try Woolyarn!
 
 Examples of projects based on Woolyarn:
 
