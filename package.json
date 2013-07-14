@@ -1,26 +1,26 @@
 {
-  "name": "woolyarn",
-  "description": "Manage the users connected to your application",
-  "version": "0.3.0",
-  "author": "Fabrizio Codello",
-  "engines": {
-    "node": "0.6.x"
-  },
-  "dependencies": {
-    "express": "3.1.x",
-    "socket.io": "0.9.x"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/Fabryz/woolyarn"
-  },
-  "keywords": [
-    "socket.io",
-    "realtime",
-    "synch",
-    "manage",
-    "users"
-  ],
-  "private": true,
-  "license": "GPL3"
+    "name": "woolyarn",
+    "description": "Manage the users connected to your application",
+    "version": "0.4.0",
+    "author": "Fabrizio Codello",
+    "engines": {
+        "node": "0.8.x"
+    },
+    "dependencies": {
+        "express": "3.3.4",
+        "socket.io": "0.9.16"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/Fabryz/woolyarn"
+    },
+    "keywords": [
+        "socket.io",
+        "realtime",
+        "sync",
+        "manage",
+        "users"
+    ],
+    "private": true,
+    "license": "GPL3"
 }
