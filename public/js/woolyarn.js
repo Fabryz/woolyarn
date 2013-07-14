@@ -139,7 +139,9 @@
 					});
 				},
 				log: function (msg) {
-					console.log(new Date().toJSON() +": "+ msg);
+					if (window.console && window.console.log) {
+                    	window.console.log(new Date().toJSON() +": "+ msg);
+                	}
 				},
 				inject: function() {
 					this.status = $('<div/>', { id: 'status'	});
