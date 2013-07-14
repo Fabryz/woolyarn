@@ -1,5 +1,5 @@
 /*
-* Express
+* Requirements
 */
 
 var express = require('express'),
@@ -10,12 +10,10 @@ var express = require('express'),
 var app = express(),
 	Woolyarn = require('./public/js/woolyarn.js').Woolyarn;
 
-// Configuration
+// Express configuration
 
 app.configure(function(){
 	app.set('port', process.env.PORT || 8080);
-	app.set('views', __dirname + '/views');
-	app.set('view engine', 'jade');
 	app.use(express.favicon());
 	app.use(express.logger('short'));
 	app.use(express.bodyParser());
