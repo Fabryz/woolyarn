@@ -8,18 +8,24 @@ var express = require('express'),
     path = require('path');
 
 var app = express(),
-    Woolyarn = require('./public/js/woolyarn.js').Woolyarn;
+    Woolyarn = require('./public/js/Woolyarn.js').Woolyarn;
+
+var Debug = {
+    log: function (msg) {
+        console.log(new Date().toJSON() +": "+ msg);
+    }
+};
 
 // Express configuration
 
-app.configure(function(){
-    app.set('port', process.env.PORT || 8080);
-    app.use(express.favicon());
+app.configure(function() {
     app.use(express.logger('short'));
+    app.set('port', process.env.PORT || 8080);
+    app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.bodyParser());
     app.use(express.methodOverride());
+    app.use(express.favicon());
     app.use(app.router);
-    app.use(express.static(path.join(__dirname, 'public')));
 });
 
 app.configure('development', function(){
@@ -36,8 +42,8 @@ app.configure('production', function(){
 //  res.sendfile('public/index.html');
 // });
 
-var server = http.createServer(app).listen(app.get('port'), function(){
-  console.log("Express server listening on port "+ app.get('port') +" in "+ app.get('env') +" mode.");
+var server = http.createServer(app).listen(app.get('port'), function() {
+    Debug.log("Express server listening on port "+ app.get('port') +" in "+ app.get('env') +" mode.");
 });
 
 /*
@@ -56,7 +62,7 @@ Woolyarn.server.init(io, function(client) {
     // Here you can listen for your events
 
     Woolyarn.server.on('customEvent', function(data) {
-        console.log('Incoming customEvent from: '+ client.id);
+        Debug.log('Incoming customEvent from: '+ client.id);
 
         io.sockets.emit('customEvent', client.id);
     });
