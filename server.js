@@ -10,16 +10,19 @@ var express = require('express'),
 var app = express(),
     Woolyarn = require('./public/js/Woolyarn.js').Woolyarn;
 
-var Debug = {
-    log: function (msg) {
-        console.log(new Date().toJSON() +": "+ msg);
-    }
-};
-
 // Express configuration
 
-app.configure(function() {
+app.configure('development', function() {
     app.use(express.logger('short'));
+    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
+});
+
+app.configure('production', function() {
+    app.use(express.logger());
+    app.use(express.errorHandler());
+});
+
+app.configure(function() {
     app.set('port', process.env.PORT || 8080);
     app.use(express.static(path.join(__dirname, 'public')));
     app.use(express.bodyParser());
@@ -28,19 +31,27 @@ app.configure(function() {
     app.use(app.router);
 });
 
-app.configure('development', function(){
-    app.use(express.errorHandler({ dumpExceptions: true, showStack: true }));
-});
+// Express Routes
 
-app.configure('production', function(){
-    app.use(express.errorHandler());
-});
+// var auth = express.basicAuth('test', 'test');
 
-// Routes
-
-// app.get('/', function(req, res) {
-//  res.sendfile('public/index.html');
+// app.get('/api/players', auth, function(req, res) {
+//     res.json(Woolyarn.players);
 // });
+
+// app.get('/api/totalPlayers', function(req, res) {
+//     res.json(Woolyarn.totalPlayers);
+// });
+
+/*
+* Main
+*/
+
+var Debug = {
+    log: function (msg) {
+        console.log(new Date().toJSON() +": "+ msg);
+    }
+};
 
 var server = http.createServer(app).listen(app.get('port'), function() {
     Debug.log("Express server listening on port "+ app.get('port') +" in "+ app.get('env') +" mode.");
